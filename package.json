@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "sass -w style.sass style.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "sass": "^1.62.1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
   }
 }

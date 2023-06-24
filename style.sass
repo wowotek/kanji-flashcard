@@ -1,0 +1,255 @@
+$common-font: "Noto Serif JP"
+  
+$flashcard-width: 54mm
+$flashcard-height: 86mm
+$flashcard-background-color: #DDD
+$flashcard-border-radius: 2mm
+  
+$top-height: 8mm
+$top-background-color: red
+$top-font-color: white
+$top-font-family: $common-font
+$top-font-size: 10px
+$borehole-size: 5mm
+$borehole-margin-left: 2mm
+$borehole-margin-right: 2mm
+
+$spelling-background-color: white
+$spelling-height: 36mm
+$spelling-padding-top: 0mm
+$spelling-padding-bottom: 0mm
+$onyomi-text-background: pink
+$onyomi-text-color: white
+$onyomi-text-gap: 1.5px
+$onyomi-font-family: $common-font
+$onyomi-font-size: 8px
+$kunyomi-text-background: yellow
+$kunyomi-text-color: black
+$kunyomi-text-gap: 1.5px
+$kunyomi-font-family: $common-font
+$kunyomi-font-size: 8px
+
+$kanji-height: 27mm
+$kanji-font-size: 24mm
+$kanji-background-color: white
+$kanji-font-family: $common-font  
+
+$mnemonic-height: 15mm
+$mnemonic-img-size: 12mm
+$mnemonic-img-gap: 3mm
+$mnemonic-background-color: red
+
+$meaning-font-size: 8px
+
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+
+body
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  justify-content: center
+  align-items: center
+  transform: scale(1.5)
+  gap: 2mm
+
+  height: 100vh
+  width: 100vw
+
+  background-color: $flashcard-background-color
+
+  .flashcard-front
+    padding: 0
+    margin: 0
+    border-radius: $flashcard-border-radius
+    width: $flashcard-width
+    height: $flashcard-height
+    background-color: white
+
+    filter: drop-shadow(0px 0px 5px #AAA)
+
+    display: flex
+    flex-direction: column
+
+    .top
+      width: 100%
+      height: $top-height
+      background-color: $top-background-color
+      border-radius: $flashcard-border_radius $flashcard-border_radius 0px 0px
+
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: center
+      align-items: center
+
+      color: $top-font-color
+      font-family: $top-font-family
+      font-size: $top-font-size
+
+      div
+        display: flex
+        justify-content: center
+        align-items: center
+        height: calc($top-height - 2mm)
+
+      .borehole
+        width: $borehole-size
+        height: $borehole-size
+        background-color: black
+        border-radius: 1000000px
+        margin-left: $borehole-margin-left
+        margin-right: $borehole-margin-right
+      
+      .onyomi-head
+        flex-direction: column
+        justify-content: flex-end
+        width: calc(50% - $borehole-size)
+      
+      .kunyomi-head
+        flex-direction: column
+        justify-content: flex-end
+        width: calc(50% - $borehole-size)
+
+    .spelling
+      height: $spelling-height
+      background-color: $spelling-background-color
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: center
+      align-items: center
+      padding-top: $spelling-padding-top
+      padding-bottom: $spelling-padding-bottom
+      
+      div
+        flex-grow: 10
+
+      .onyomi
+        width: 50%
+        padding-right: 0.3mm
+        padding-left: 0.7mm
+        display: flex
+        flex-direction: column
+        justify-content: left
+        align-items: flex-start
+        gap: $onyomi-text-gap
+        font-family: $onyomi-font-family
+        font-size: $onyomi-font-size
+
+        p
+          padding: 0
+          margin: 0
+          width: 100%
+          text-align: center
+          color: $onyomi-text-color
+          background-color: $onyomi-text-background
+          border-bottom: 0.5px dashed #ccc
+
+      .kunyomi
+        width: 50%
+        padding-left: 0.3mm
+        padding-right: 0.7mm
+        display: flex
+        flex-direction: column
+        justify-content: left
+        align-items: flex-start
+        gap: $kunyomi-text-gap
+        font-family: $kunyomi-font-family
+        font-size: $kunyomi-font-size
+
+        p
+          padding: 0
+          margin: 0
+          width: 100%
+          text-align: center
+          color: $kunyomi-text-color
+          background-color: $kunyomi-text-background
+          border-bottom: 0.5px dashed #ccc
+
+    .kanji
+      height: $kanji-height
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: $kanji-background-color
+      border-top: 0.5px dashed black
+      border-bottom: 0.5px dashed black
+
+      span
+        margin-top: -5mm
+        margin-bottom: -5mm
+        text-align: center
+        font-size: $kanji-font-size
+        font-family: $kanji-font-family
+
+    .mnemonic
+      border-radius: 0px 0px $flashcard-border_radius $flashcard-border_radius
+      height: $mnemonic-height
+      background-color: $mnemonic-background-color
+
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: center
+      align-items: flex-start
+      gap: $mnemonic-img-gap
+      padding-top: 1.2mm
+
+      div
+        padding: 0
+        margin: 0
+        width: $mnemonic-img-size
+        height: $mnemonic-img-size
+
+        img
+          padding: 0
+          margin: 0
+          object-fit: contain
+
+  .flashcard-back
+    padding: 0
+    margin: 0
+    border-radius: $flashcard-border-radius
+    width: $flashcard-width
+    height: $flashcard-height
+    background-color: white
+
+    filter: drop-shadow(0px 0px 5px #AAA)
+
+    display: flex
+    flex-direction: column
+
+    .head
+      display: flex
+      font-family: "Arial"
+      font-size: 9px
+      width: 100%
+      height: 5mm
+      background-color: red
+      justify-content: center
+      align-items: center
+
+    .meaning-head
+      border-radius: $flashcard-border-radius $flashcard-border-radius 0px 0px
+
+
+    .meaning
+      border-bottom: 1px dashed black
+      display: flex
+      flex-direction: column
+      gap: 0.6mm
+      padding-left: 0.6mm
+      padding-right: 0.6mm
+      
+      p
+        width: 100%
+        background-color: yellow
+        font-size: $meaning-font-size
+        color: black
+

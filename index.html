@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+JP">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flashcard-front">
+        <div class="top">
+            <div class="onyomi-head">オンヨミ</div>
+            <div class="borehole"></div>
+            <div class="kunyomi-head">くんよみ</div>
+        </div>
+        <div class="spelling">
+            <div class="onyomi" id="spelling-onyomi">
+            </div>
+            <div class="kunyomi" id="spelling-kunyomi">
+            </div>
+        </div>
+        <div class="kanji">
+            <span id="kanji"></span>
+        </div>
+        <div class="mnemonic">
+            <div id="i1"></div>
+            <div id="i2"></div>
+            <div id="i3"></div>
+        </div>
+    </div>
+    <div class="flashcard-back">
+        <div class="head meaning-head">Meaning</div>
+        <div class="meaning" id="meaning">
+            <p>Test Meaning</p>
+            <p>Test Meaning</p>
+            <p>Test Meaning</p>
+            <p>Test Meaning</p>
+            <p>Test Meaning</p>
+            <p>Test Meaning</p>
+        </div>
+        <div class="head common_word">Common Word</div>
+    </div>
+</body>
+
+<script defer>
+function setCardInformation(kanji) {
+    $.getJSON("/kanjis.json", (kanjiDatas) => {
+        console.log(kanjiDatas[kanji]);
+        kanjiData = kanjiDatas[kanji];
+        const data = {
+            kanji: kanji,
+            onyomis: kanjiData.on_readings,
+            kunyomis: kanjiData.kun_readings,
+            mnemonics: {
+                i1: "clock.webp",
+                i2: "exit.png",
+                i3: "sun.png"
+            }
+        }
+        function setKanji() {
+            let KANJI = document.getElementById("kanji");
+            KANJI.innerHTML = data.kanji;
+        }
+        
+        function setOnyomis() {
+            let ONYOMI = document.getElementById("spelling-onyomi");
+            ONYOMI.innerHTML = "";
+            for(const onyomi of data.onyomis) {
+                ONYOMI.innerHTML += `<p>${onyomi}</p>`;
+            }
+        }
+        
+        function setKunyomis() {
+            let KUNYOMI = document.getElementById("spelling-kunyomi");
+            KUNYOMI.innerHTML = "";
+            for(const kunyomi of data.kunyomis) {
+                KUNYOMI.innerHTML += `<p>${kunyomi}</p>`;
+            }
+        }
+        
+        function setMnemonics() {
+            const im1 = new Image();
+            const im2 = new Image();
+            const im3 = new Image();
+        
+            im1.onload = imgLoad;
+            im2.onload = imgLoad;
+            im3.onload = imgLoad;
+        
+            im1.src = "img/" + data.mnemonics.i1;
+            im2.src = "img/" + data.mnemonics.i2;
+            im3.src = "img/" + data.mnemonics.i3;
+        
+            const i1el = document.getElementById("i1");
+            const i2el = document.getElementById("i2");
+            const i3el = document.getElementById("i3");
+            i1el.appendChild(im1);
+            i2el.appendChild(im2);
+            i3el.appendChild(im3);
+        }
+
+        function setMeaning() {
+            const meaning = document.getElementById("meaning");
+
+            meaning.innerHTML = "";
+            for(const m of kanjiData.meanings) {
+                meaning.innerHTML += `<p>${m}</p>`;
+            }
+        }
+        
+        function imgLoad() {
+            if(this.width == this.height) {
+                this.style = "width: 100%; height: 100%; object-fit: contain; padding: 0; margin: 0";
+            } else if(this.width > this.height) {
+                this.style = "width: 100%; height: unset; object-fit: contain; padding: 0; margin: 0";
+            } else {
+                this.style = "width: unset; height: 100%; object-fit: contain; padding: 0; margin: 0";
+            }
+        }
+        
+        setKanji();
+        setOnyomis();
+        setKunyomis();
+        setMnemonics();
+        
+        // Back
+        setMeaning();
+    });
+}
+
+setCardInformation("時");
+</script>
+</html>
